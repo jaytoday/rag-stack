@@ -1,15 +1,28 @@
-from models.models import (
-    Document,
-)
+from typing import List
+from models.models import FilePreview
 from pydantic import BaseModel
-from typing import List, Optional, Dict, TypeVar, Union
+
+
+class AskQuestionRequest(BaseModel):
+    question: str
+
+
+class GetFileRequest(BaseModel):
+    file_name: str
 
 
 class UpsertFilesResponse(BaseModel):
     success: bool
 
-class AskQuestionRequest(BaseModel):
-    question: str
 
 class AskQuestionResponse(BaseModel):
     answer: str
+    sources: List[str]
+
+
+class GetFileResponse(BaseModel):
+    signed_url: str
+
+
+class GetPreviewsResponse(BaseModel):
+    previews: List[FilePreview]
